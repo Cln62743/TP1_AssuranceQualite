@@ -71,11 +71,21 @@ public class Calcul {
 						tempCommande = sub.get(j).split(" ");
 						
 						for(int k = 0; k < commandes[0].length; k++) {
-							
+							boolean resultClient = false;
+							boolean resultPlats = false;
 							for(int l = 0; l < clients.length; l++) {
-								if(tempCommande[0] != clients[l] ||  tempCommande[1] != plats[l][0]) {
-									throw new Exception();
+								if(tempCommande[0].equals(clients[l]) && !resultClient) {
+									resultClient = true;
+								}	
+								if(tempCommande[1].equals(plats[l][0]) && !resultPlats) {
+									resultPlats = true;
 								}
+								if(resultClient && resultPlats)
+									break;
+							}
+							if(!resultClient && !resultPlats) {
+								throw new Exception();
+							}else {
 								commandes[j][k] = tempCommande[k];
 							}
 						}					
@@ -83,7 +93,7 @@ public class Calcul {
 					break;
 					}catch (Exception e) {
 						System.out.println("Le fichier ne respecte pas le format demandé !");
-						break;
+						return;
 					}
 				}				
 				i++;
