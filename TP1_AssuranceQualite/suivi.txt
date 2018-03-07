@@ -1,0 +1,10 @@
+tâche pour philippe chevry
+
+faire editer le fichier texte la date et heure
+et afficher les commandes incorrecte 
+et la raison de l'erreur avant la facture
+
+tâche de charles langevin
+
+n'affiche pas si le client a 0$ et le calcul des taxes
+
