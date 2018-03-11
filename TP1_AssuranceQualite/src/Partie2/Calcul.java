@@ -1,11 +1,16 @@
 package Partie2;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 public class Calcul {
 	
 	private ArrayList<String> obj = new ArrayList<String>();
@@ -16,7 +21,13 @@ public class Calcul {
 	private String[][] commandes ;
 	
 	File file = new File("Facture.txt");
+	  DateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+
+	    //obtenir l'heure courante
+	    Calendar calendar = Calendar.getInstance();
+	File file1 = new File("Facture-du-"+format.format(calendar.getTime())+".txt");
 	
+	BufferedWriter bw = null;
 	public double[] prix;
 	
 	public Calcul() {
@@ -74,6 +85,7 @@ public class Calcul {
 							
 							for(int l = 0; l < clients.length; l++) {
 								if(tempCommande[0] != clients[l] ||  tempCommande[1] != plats[l][0]) {
+									
 									throw new Exception();
 								}
 								commandes[j][k] = tempCommande[k];
@@ -137,5 +149,60 @@ public class Calcul {
 			}			
 		}
 		new Facture(clients, prix);
+	}
+	
+	public void afficherCommandeErroner() {
+		
+		
+		String clientPlatExistePas="";
+		String formatNonRespecter="";
+		String chiffreErroner="";
+			String platPrix;
+		commandes = new String[sub.size()][3];
+		String[] tempCommande;
+		try {
+			
+			bw.write("commandes erroné");
+			bw.newLine();
+			for(int i = 0; i < commandes.length; i++) {
+				bw.write(commandes[i] +
+						" ");
+				bw.newLine();
+			}
+						
+			for(int j = 0; j < commandes.length; j++) {
+			tempCommande = sub.get(j).split(" ");
+			
+			for(int k = 0; k < commandes[0].length; k++) {
+				
+				for(int l = 0; l < clients.length; l++) {
+					if(tempCommande[0] != clients[l] ||  tempCommande[1] != plats[l][0] ) {
+						clientPlatExistePas ="Le client ou le plat n'existe pas";
+					bw.write(clientPlatExistePas);
+						
+					}
+					
+					if (clients[l].contains(" ") || !plats[l][0].contains(" ") || !commandes[l][k].contains(" ")) {
+						formatNonRespecter = "Le format n'est pas respecté";
+						bw.write(formatNonRespecter);
+					}
+					platPrix = plats[l][1];
+					if (tempCommande[2] != commandes[l][2] || platPrix != plats[l][1] ) {
+						chiffreErroner="les chiffres de la quantité  de plat commandéet et du prix du plat est érroné";
+						bw.write(chiffreErroner);
+					}
+					
+				}
+			}					
+		}
+		
+			
+			
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

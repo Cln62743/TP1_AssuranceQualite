@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Facture{
 	
@@ -13,9 +15,19 @@ public class Facture{
 	private String[] clients;
 	
 	private double[] prix;
-	  
 	
-	File file = new File("FactureSortie.txt");
+	
+	
+    DateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+
+    //obtenir l'heure courante
+    Calendar calendar = Calendar.getInstance();
+  
+	
+	
+	
+	File file = new File("Facture-du-"+format.format(calendar.getTime())+".txt");
+
 	BufferedWriter bw = null;
 	
 	public Facture(String[] clientsM, double[] prixM){
@@ -36,7 +48,7 @@ public class Facture{
 			
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
-		
+			
 			afficher();
 			bw.close();
 			
@@ -48,6 +60,7 @@ public class Facture{
 	public void afficher(){
 		
 		try {
+		
 			bw.write("Bienvenue chez Barette!");
 			bw.newLine();
 			bw.write("Factures:");
@@ -55,9 +68,13 @@ public class Facture{
 			for(int i = 0; i < clients.length; i++) {
 				bw.write(clients[i] + " " + df.format(prix[i]) + "");
 				bw.newLine();
+				
 			}
+			
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+
 }
