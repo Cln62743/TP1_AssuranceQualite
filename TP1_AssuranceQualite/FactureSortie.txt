@@ -1,5 +1,4 @@
 Bienvenue chez Barette!
 Factures:
-Roger 0,00$
-Céline 0,00$
-Steeve 0,00$
+Roger 12,07$ TPS : 0,53$ TVQ : 1,05$
+Céline 23,86$ TPS : 1,04$ TVQ : 2,08$

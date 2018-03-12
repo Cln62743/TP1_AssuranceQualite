@@ -13,6 +13,7 @@ public class Facture{
 	private String[] clients;
 	
 	private double[] prix;
+	private double[] taxe = new double [2];
 	  
 	
 	File file = new File("FactureSortie.txt");
@@ -53,11 +54,24 @@ public class Facture{
 			bw.write("Factures:");
 			bw.newLine();
 			for(int i = 0; i < clients.length; i++) {
-				bw.write(clients[i] + " " + df.format(prix[i]) + "");
-				bw.newLine();
+				if(CheckValidity(prix[i]) != 0) {
+					prix[i] += taxe[0] + taxe[1];
+					bw.write(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(taxe[0]) + " TVQ : " + df.format(taxe[1]) + "");
+					bw.newLine();
+				}
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public double CheckValidity(double prixLigne) {
+		
+		if(prixLigne != 0) {
+			taxe[0] = prixLigne * 0.05;
+			taxe[1] = prixLigne * 0.1;
+		}
+		
+		return prixLigne;
 	}
 }

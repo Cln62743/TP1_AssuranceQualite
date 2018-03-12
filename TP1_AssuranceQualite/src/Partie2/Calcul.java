@@ -67,16 +67,23 @@ public class Calcul {
 					commandes = new String[sub.size()][3];
 					String[] tempCommande;
 					
+					// Separe les lignes en trois partie / Client / Commande / nb Commandes
 					for(int j = 0; j < commandes.length; j++) {
 						tempCommande = sub.get(j).split(" ");
 						
 						for(int k = 0; k < commandes[0].length; k++) {
-							
+							boolean trouve = false;
 							for(int l = 0; l < clients.length; l++) {
-								if(tempCommande[0] != clients[l] ||  tempCommande[1] != plats[l][0]) {
-									throw new Exception();
+								if(tempCommande[0].equals(clients[l]) &&  tempCommande[1].equals(plats[k][0])) {
+									commandes[j] = tempCommande;
+									trouve = true;
+									break;									
+								}else if(tempCommande[0].equals(clients[l])) {
+									break;									
 								}
-								commandes[j][k] = tempCommande[k];
+							}
+							if(trouve) {
+								break;
 							}
 						}					
 					}
