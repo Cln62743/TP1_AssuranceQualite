@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class Facture{
 	
 	java.text.DecimalFormat df = new java.text.DecimalFormat("0.00$");
@@ -12,6 +13,7 @@ public class Facture{
 	private String[] clients;
 	
 	private double[] prix;
+	  
 	
 	File file = new File("FactureSortie.txt");
 	BufferedWriter bw = null;
