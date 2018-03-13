@@ -1,0 +1,5 @@
+1. Créer une condition qui vérifie si le client a acheté pour plus de 0$. 
+	Si oui il est affiché dans la facture.
+	Si non il n'est pas affiché dans la facture.
+
+2. Création d'une méthode qui calcule et applique la TPS et la TVQ sur le prix finale.

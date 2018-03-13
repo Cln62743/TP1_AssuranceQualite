@@ -1,0 +1,21 @@
+Charles:
+
+	- Création de la condition qui s'assure que les facture de 0$ ne sont pas affiché.
+	- Application des taxes.
+	- Condition de vérification des commandes incorrectes
+	-
+	-
+	-
+	-
+	-
+
+Philippe:
+
+	- Modification automatique du nom de la facture pour le format : Facture-du-"date-heure".txt.
+	- Affichage de le facture sur l'écran terminal
+	- Affichage de toutes les commandes incorrectes avant les factures
+	-
+	-
+	-
+	-
+	-
