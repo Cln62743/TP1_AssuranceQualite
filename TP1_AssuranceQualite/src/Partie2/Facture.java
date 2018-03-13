@@ -54,9 +54,9 @@ public class Facture{
 			bw.write("Factures:");
 			bw.newLine();
 			for(int i = 0; i < clients.length; i++) {
-				if(CheckValidity(prix[i]) != 0) {
+				if(CheckValidity(prix[i])) {
 					prix[i] += taxe[0] + taxe[1];
-					bw.write(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(taxe[0]) + " TVQ : " + df.format(taxe[1]) + "");
+					bw.write(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(CalculTps(prix[i])) + " TVQ : " + df.format(CalculTvq(prix[i])) + "");
 					bw.newLine();
 				}
 			}
@@ -65,13 +65,15 @@ public class Facture{
 		}
 	}
 	
-	public double CheckValidity(double prixLigne) {
-		
+	/// Check if price is higher than 0
+	public static boolean CheckValidity(double prixLigne) {
+		boolean result = false;
 		if(prixLigne != 0) {
-			taxe[0] = prixLigne * 0.05;
-			taxe[1] = prixLigne * 0.1;
-		}
-		
-		return prixLigne;
+			result = true;
+		}	
+		return result;
 	}
+	
+	public static double CalculTps (double prix) {return prix * .05;};
+	public static double CalculTvq (double prix) {return prix * .10;};	
 }
