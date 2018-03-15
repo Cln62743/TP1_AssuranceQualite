@@ -19,7 +19,7 @@ public class Facture{
 	File file = new File("FactureSortie.txt");
 	BufferedWriter bw = null;
 	
-	public Facture(String[] clientsM, double[] prixM){
+	public Facture(String[] clientsM, double[] prixM, String[] erreur){
 		
 		FileWriter fw;
 		this.clients = clientsM;
@@ -53,10 +53,11 @@ public class Facture{
 			bw.newLine();
 			bw.write("Factures:");
 			bw.newLine();
+			
 			for(int i = 0; i < clients.length; i++) {
-				if(CheckValidity(prix[i])) {
+				if(checkValidity(prix[i])) {
 					prix[i] += taxe[0] + taxe[1];
-					bw.write(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(CalculTps(prix[i])) + " TVQ : " + df.format(CalculTvq(prix[i])) + "");
+					bw.write(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(calculTps(prix[i])) + " TVQ : " + df.format(calculTvq(prix[i])) + "");
 					bw.newLine();
 				}
 			}
@@ -65,8 +66,8 @@ public class Facture{
 		}
 	}
 	
-	/// Check if price is higher than 0
-	public static boolean CheckValidity(double prixLigne) {
+	// Check if price is higher than 0
+	public static boolean checkValidity(double prixLigne) {
 		boolean result = false;
 		if(prixLigne != 0) {
 			result = true;
@@ -74,6 +75,6 @@ public class Facture{
 		return result;
 	}
 	
-	public static double CalculTps (double prix) {return prix * .05;};
-	public static double CalculTvq (double prix) {return prix * .10;};
+	public static double calculTps (double prix) {return prix * .05;};
+	public static double calculTvq (double prix) {return prix * .10;};
 }

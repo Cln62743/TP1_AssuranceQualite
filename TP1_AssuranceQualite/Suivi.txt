@@ -3,9 +3,9 @@ Charles:
 	- Création de la condition qui s'assure que les facture de 0$ ne sont pas affiché.
 	- Application des taxes.
 	- Condition de vérification des commandes incorrectes
-	-
-	-
-	-
+	- Test de la méthode calculTps
+	- Test de la méthode calculTvq
+	- Test de la méthode checkValidity
 	-
 	-
 

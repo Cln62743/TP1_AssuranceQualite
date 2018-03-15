@@ -10,6 +10,7 @@ public class Calcul {
 	
 	private ArrayList<String> obj = new ArrayList<String>();
 	private ArrayList<String> sub = new ArrayList<String>();
+	private ArrayList<String> erreur = new ArrayList<String>();
 	
 	public String[] clients ;
 	private String[][] plats ;
@@ -33,8 +34,15 @@ public class Calcul {
 				case 0: break;
 				// Tableau de client
 				case 1:
-					clients = new String[sub.size()];
-					clients = sub.toArray(clients);
+					for(int indCli = 0; i < sub.size(); i++) {
+						
+						String clientTemp = checkClientValidity(sub.get(indCli));
+						if(!clientTemp.equals(" ")) {
+							clients[indCli] = clientTemp;
+						}else {
+							erreur.add("Client non valide");
+						}
+					}
 					break;
 				// Tableau de plats
 				case 2:
@@ -42,10 +50,7 @@ public class Calcul {
 					break;
 				// Tableau de commandes
 				case 3:
-					
 						assignationCommande();
-					
-					
 					break;
 				}
 				
@@ -100,6 +105,17 @@ public class Calcul {
 				tempCommande = sub.get(j).split(" ");
 				
 				for(int k = 0; k < commandes[0].length; k++) {
+					
+					if(!CheckPlatExist(tempCommande[1])) {
+						erreur.add("Le plat choisi n'existe pas.");
+						break;
+					}else if(CheckClientExist(tempCommande[0])) {
+						erreur.add("Le client choisi n'existe pas.");
+						break;
+					}else if(CheckNbCommandeValid(tempCommande[2])) {
+						erreur.add("Le format du nombre de commande n'est pas respecté");
+					}
+					
 					boolean trouve = false;
 					
 					for(int l = 0; l < clients.length; l++) {
@@ -120,10 +136,51 @@ public class Calcul {
 				}					
 			}
 		}catch (Exception e) {
-			System.out.println("Le fichier ne respecte pas le format demandé !");
+			erreur.add("Le format de commande ne respecte pas le format demandé.");
 		}
 	};
 
+	// Validation
+	private String checkClientValidity(String clientM) {
+		String clientValidation = " ";
+		if(clientM.matches("[a-zA-Z]")) {
+			clientValidation = clientM;
+		}
+		return clientValidation;
+	}
+	
+	private boolean CheckPlatExist(String platM) {
+		boolean result = false;
+		for(int i = 0; i < plats.length; i++) {
+			if(platM.equals(plats[i][0])) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	private boolean CheckClientExist(String clientM) {
+		boolean result = false;
+		for(int i = 0; i < clients.length; i++) {
+			if(clientM.equals(clients[i])) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	private boolean CheckNbCommandeValid(String nbCommande) {
+		boolean result = false;
+		if(nbCommande.matches("[0-9]")) {
+			if(Integer.parseInt(nbCommande) > 0) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
 	/// ------------------------------------------------------------------------------------------------
 	private void faireCalcul() {
 		double[] prix = new double[clients.length];
@@ -156,12 +213,11 @@ public class Calcul {
 				}
 			}			
 		}
-		new Facture(clients, prix);
+		new Facture(clients, prix, (String[]) erreur.toArray());
 	}
 	
 	public static void main(String[] args) {
-		
-		
+
 		new Calcul();
 	}
 }
