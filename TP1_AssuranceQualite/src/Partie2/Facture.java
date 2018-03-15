@@ -75,5 +75,5 @@ public class Facture{
 	}
 	
 	public static double CalculTps (double prix) {return prix * .05;};
-	public static double CalculTvq (double prix) {return prix * .10;};	
+	public static double CalculTvq (double prix) {return prix * .10;};
 }
