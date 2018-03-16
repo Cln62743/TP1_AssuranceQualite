@@ -92,7 +92,7 @@ public class Facture{
 			}
 			
 		}
-		facture.add("Bienvenue chez Barette!");
+		facture.add("\nBienvenue chez Barette!");
 	
 		facture.add("Factures:");
 	
