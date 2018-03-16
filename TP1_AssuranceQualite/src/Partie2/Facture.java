@@ -84,7 +84,7 @@ public class Facture{
 	
 	public ArrayList<String> RentrerVariableList() {
 		ArrayList<String> facture =  new ArrayList<>();
-		facture.add("commande erroné");
+		facture.add("commande erroné et la raison");
 		for (int i = 0; i < erreurCommande.length  ; i++) {
 			facture.add(erreurCommande[i]);
 		}
