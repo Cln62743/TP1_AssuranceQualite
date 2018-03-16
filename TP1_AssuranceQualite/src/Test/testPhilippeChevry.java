@@ -7,7 +7,7 @@ import Partie2.Facture;
 class testPhilippeChevry {
 
 	@Test
-	void testListeAffichageNonNull() {
+	void testListeAffichageAvecErreurNonNull() {
 		 String[] clientsM1 = {"christian","ddd" ,"ddddde"} ;
 		
 		 double[] prixM1 =   {15.45,43.33 ,0.00};
@@ -18,8 +18,8 @@ class testPhilippeChevry {
 	}
 	
 	@Test
-	void testListeAffichageAucuneErreur() {
-		 String[] clientsM9 = {"christian","ddd" ,"ddddde"} ;
+	void testListeAffichageAucuneErreurNonNull() {
+		 String[] clientsM9 = {"christian","david" ,"ddddddde"} ;
 		
 		 double[] prixM9 =   {15.45,90.33 ,0.00};
 		 String[] erreur9 ={" "} ;
