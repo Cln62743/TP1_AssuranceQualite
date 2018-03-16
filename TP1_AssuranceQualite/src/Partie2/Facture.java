@@ -17,9 +17,9 @@ public class Facture{
 	private String[] clients;
 	
 	private double[] prix;
-	private double[] taxe = new double [2];
-	private String[] erreurCommande;  
-	  DateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+	private double[] taxe = new double[2];
+	public String[] erreurCommande;
+	DateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
 	  
 	  
       //obtenir l'heure courante
@@ -84,9 +84,13 @@ public class Facture{
 	
 	public ArrayList<String> RentrerVariableList() {
 		ArrayList<String> facture =  new ArrayList<>();
+		if (erreurCommande[0] != " ") {
 		facture.add("commande erroné et la raison");
 		for (int i = 0; i < erreurCommande.length  ; i++) {
-			facture.add(erreurCommande[i]);
+			
+				facture.add(erreurCommande[i]);
+			}
+			
 		}
 		facture.add("Bienvenue chez Barette!");
 	
