@@ -36,9 +36,7 @@ public class Calcul {
 				// Tableau de client
 				case 1:
 					clients = new String[sub.size()];
-					clients = sub.toArray(clients);
-					for (int indCli = 0; i < sub.size(); i++) {
-
+					for (int indCli = 0; indCli < sub.size(); indCli++) {
 						String clientTemp = checkClientValidity(sub.get(indCli));
 						if (!clientTemp.equals(" ")) {
 							clients[indCli] = clientTemp;
@@ -111,10 +109,10 @@ public class Calcul {
 					if (!CheckPlatExist(tempCommande[1])) {
 						erreur.add("Le plat choisi n'existe pas.");
 						break;
-					} else if (CheckClientExist(tempCommande[0])) {
+					} else if (!CheckClientExist(tempCommande[0])) {
 						erreur.add("Le client choisi n'existe pas.");
 						break;
-					} else if (CheckNbCommandeValid(tempCommande[2])) {
+					} else if (!CheckNbCommandeValid(tempCommande[2])) {
 						erreur.add("Le format du nombre de commande n'est pas respecté");
 					}
 
@@ -144,7 +142,7 @@ public class Calcul {
 	// Validation
 	private String checkClientValidity(String clientM) {
 		String clientValidation = " ";
-		if (clientM.matches("[a-zA-Z]")) {	
+		if (clientM.matches("\\p{javaLetter}+")) {	
 			clientValidation = clientM;		
 		}
 		return clientValidation;
