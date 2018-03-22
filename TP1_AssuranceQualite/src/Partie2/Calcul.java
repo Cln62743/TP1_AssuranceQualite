@@ -209,8 +209,8 @@ public class Calcul {
 					}
 				}
 			}
-		}
-		new Facture(clients, prix, (String[]) erreur.toArray());
+		}	
+		new Facture(clients, prix, erreur);
 	}
 
 	public static void main(String[] args) {

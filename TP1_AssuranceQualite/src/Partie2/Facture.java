@@ -18,7 +18,7 @@ public class Facture{
 	
 	private double[] prix;
 	private double[] taxe = new double[2];
-	public String[] erreurCommande;
+	public ArrayList<String>erreurCommande;
 	DateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
 	  
 	  
@@ -32,7 +32,7 @@ public class Facture{
 	BufferedWriter bw = null;
 	private ArrayList<String> afficherFacture = new ArrayList<>();
 	
-	public Facture(String[] clientsM, double[] prixM, String[] erreur){
+	public Facture(String[] clientsM, double[] prixM, ArrayList<String> erreur){
 		
 		FileWriter fw;
 		this.clients = clientsM;
@@ -84,11 +84,11 @@ public class Facture{
 	
 	public ArrayList<String> RentrerVariableList() {
 		ArrayList<String> facture =  new ArrayList<>();
-		if (erreurCommande[0] != " ") {
+		if (erreurCommande.size() != 0) {
 		facture.add("commande erroné et la raison");
-		for (int i = 0; i < erreurCommande.length  ; i++) {
+		for (int i = 0; i < erreurCommande.size()  ; i++) {
 			
-				facture.add(erreurCommande[i]);
+				facture.add(erreurCommande.get(i));
 			}
 			
 		}

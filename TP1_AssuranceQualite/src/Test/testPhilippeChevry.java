@@ -1,6 +1,9 @@
 package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import Partie2.Facture;
 
@@ -11,7 +14,8 @@ class testPhilippeChevry {
 		 String[] clientsM1 = {"christian","ddd" ,"ddddde"} ;
 		
 		 double[] prixM1 =   {15.45,43.33 ,0.00};
-		 String[] erreur1 = {" format incorrect"} ;
+		 ArrayList<String>erreur1 = new ArrayList<>() ;
+		 erreur1.add("format incorrect");
 		Facture facture = new Facture( clientsM1,  prixM1, erreur1);
 		facture.RentrerVariableList();
 		assertNotNull(facture.RentrerVariableList());
@@ -22,7 +26,8 @@ class testPhilippeChevry {
 		 String[] clientsM9 = {"christian","david" ,"ddddddde"} ;
 		
 		 double[] prixM9 =   {15.45,90.33 ,0.00};
-		 String[] erreur9 ={" "} ;
+		 ArrayList<String>erreur9 = new ArrayList<>() ;
+		 erreur9.add(" ");
 		Facture facture1 = new Facture( clientsM9,  prixM9, erreur9);
 		facture1.RentrerVariableList();
 		assertNotNull(facture1.RentrerVariableList());
@@ -34,7 +39,8 @@ class testPhilippeChevry {
 		 String[] clientsM10 = {"christian","ddd" ,"ddddde"} ;
 			
 		 double[] prixM10 =   {15.45,90.33 ,0.00};
-		 String[] erreur10 ={" "} ;
+		 ArrayList<String>erreur10 = new ArrayList<>() ;
+		 erreur10.add(" ");
 		Facture facture2 = new Facture( clientsM10,  prixM10, erreur10);
 		facture2.erreurCommande = null;
 		assertNull(facture2.erreurCommande);
