@@ -16,6 +16,10 @@ public class Calcul {
 	private String[][] plats;
 	private String[][] commandes;
 
+	public String[][] getCommandes() {
+		return commandes;
+	}
+
 	public Calcul() {
 
 		// Appeler methode pour ouvrir le fichier .txt

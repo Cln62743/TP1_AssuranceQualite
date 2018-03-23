@@ -107,7 +107,14 @@ public class Facture{
 	}
 
 	private void rentrerListAvecErreur(ArrayList<String> facture) {
+		Calcul calcul = new Calcul();
+		
 		facture.add("commande erroné et la raison");
+		for (int i = 0; i < calcul.getCommandes().length; i++) {
+			for (int j = 0; j < calcul.getCommandes()[i].length; j++) {
+				erreurCommande.add(calcul.getCommandes()[i][j]);
+			}
+		}
 		for (int i = 0; i < erreurCommande.size(); i++) {
 			facture.add(erreurCommande.get(i));
 		}
