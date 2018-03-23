@@ -17,8 +17,8 @@ class testPhilippeChevry {
 		 ArrayList<String>erreur1 = new ArrayList<>() ;
 		 erreur1.add("format incorrect");
 		Facture facture = new Facture( clientsM1,  prixM1, erreur1);
-		facture.RentrerVariableList();
-		assertNotNull(facture.RentrerVariableList());
+		facture.rentrerVariableList();
+		assertNotNull(facture.rentrerVariableList());
 	}
 	
 	@Test
@@ -27,10 +27,10 @@ class testPhilippeChevry {
 		
 		 double[] prixM9 =   {15.45,90.33 ,0.00};
 		 ArrayList<String>erreur9 = new ArrayList<>() ;
-		 erreur9.add(" ");
+		 erreur9.add("");
 		Facture facture1 = new Facture( clientsM9,  prixM9, erreur9);
-		facture1.RentrerVariableList();
-		assertNotNull(facture1.RentrerVariableList());
+		facture1.rentrerVariableList();
+			assertNotNull(facture1.rentrerVariableList());	
 	}
 
 	@Test

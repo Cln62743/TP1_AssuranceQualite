@@ -61,7 +61,7 @@ public class Facture{
 	}
 	
 	public void afficher(){
-		afficherFacture = RentrerVariableList();
+		afficherFacture = rentrerVariableList();
 		try {
 		for (int i = 0; i < afficherFacture.size(); i++) {
 			bw.write(afficherFacture.get(i));
@@ -73,39 +73,46 @@ public class Facture{
 	}
 	
 	public void afficherTerminal() {
-		afficherFacture = RentrerVariableList();
+		afficherFacture = rentrerVariableList();
 		for (int i = 0; i < afficherFacture.size();i++) {
 			System.out.println(afficherFacture.get(i));
 		}
-	
-	
-	
 	}
 	
-	public ArrayList<String> RentrerVariableList() {
-		ArrayList<String> facture =  new ArrayList<>();
+	public ArrayList<String> rentrerVariableList() {
+		ArrayList<String> facture = new ArrayList<>();
 		if (erreurCommande.size() != 0) {
-		facture.add("commande erroné et la raison");
-		for (int i = 0; i < erreurCommande.size()  ; i++) {
-			
-				facture.add(erreurCommande.get(i));
-			}
-			
-		}
-		facture.add("\nBienvenue chez Barette!");
-	
-		facture.add("Factures:");
-	
-		for(int i = 0; i < clients.length; i++) {
-			if(checkValidity(prix[i])) {
-				prix[i] += taxe[0] + taxe[1];
-				facture.add(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(calculTps(prix[i])) + " TVQ : " + df.format(calculTvq(prix[i])) + "");
-				
-			}
-			
+			rentrerListAvecErreur(facture);
 		}
 		
+			rentrerListSansErreur(facture);
+			
 		return facture;
+	}
+
+	private void rentrerListSansErreur(ArrayList<String> facture) {
+		facture.add("Bienvenue chez Barette!");
+
+		facture.add("Factures:");
+
+		for (int i = 0; i < clients.length; i++) {
+			if (checkValidity(prix[i])) {
+				prix[i] += taxe[0] + taxe[1];
+				facture.add(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(calculTps(prix[i]))
+						+ " TVQ : " + df.format(calculTvq(prix[i])) + "");
+
+			}
+
+		}
+	}
+
+	private void rentrerListAvecErreur(ArrayList<String> facture) {
+		facture.add("commande erroné et la raison");
+		for (int i = 0; i < erreurCommande.size(); i++) {
+			facture.add(erreurCommande.get(i));
+		}
+		facture.add("\n");
+		
 	}
 	// Check if price is higher than 0
 	public static boolean checkValidity(double prixLigne) {
@@ -117,5 +124,7 @@ public class Facture{
 	}
 	
 	public static double calculTps (double prix) {return prix * .05;};
-	public static double calculTvq (double prix) {return prix * .10;};
+	public static double calculTvq (double prix) {return prix * .10;}
+
+	
 }
