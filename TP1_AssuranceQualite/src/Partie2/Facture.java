@@ -98,9 +98,7 @@ public class Facture {
 				prix[i] += taxe[0] + taxe[1];
 				facture.add(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(calculTps(prix[i]))
 						+ " TVQ : " + df.format(calculTvq(prix[i])) + "");
-
 			}
-
 		}
 	}
 
