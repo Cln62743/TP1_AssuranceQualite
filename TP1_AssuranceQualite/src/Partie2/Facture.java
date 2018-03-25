@@ -138,5 +138,4 @@ public class Facture {
 	public static double calculTvq(double prix) {
 		return prix * .10;
 	}
-
 }
