@@ -104,24 +104,23 @@ public class Calcul {
 		try {
 			commandes = new String[sub.size()][3];
 			String[] tempCommande;
-			
+
 			// Separe les lignes en trois partie / Client / Commande / nb Commandes
 			for (int j = 0; j < commandes.length; j++) {
 				tempCommande = sub.get(j).split(" ");
 
 				for (int k = 0; k < commandes[0].length; k++) {
-					if (!CheckPlatExist(tempCommande[1])) {					
+					if (!CheckPlatExist(tempCommande[1])) {
 						erreur.add("Le plat choisi n'existe pas.");
 						break;
-					} else if (!CheckClientExist(tempCommande[0])) {		
+					} else if (!CheckClientExist(tempCommande[0])) {
 						erreur.add("Le client choisi n'existe pas.");
 						break;
-					} else if (!CheckNbCommandeValid(tempCommande[2])) {
-				
+					} else if (CheckNbCommandeValid(tempCommande[2])) {
 						erreur.add("Le format du nombre de commande n'est pas respecté");
-						break;	
+						break;
 					}
-					
+
 					boolean trouve = false;
 
 					for (int l = 0; l < clients.length; l++) {
@@ -148,8 +147,8 @@ public class Calcul {
 	// Validation
 	private String checkClientValidity(String clientM) {
 		String clientValidation = " ";
-		if (clientM.matches("\\p{javaLetter}+")) {	
-			clientValidation = clientM;		
+		if (clientM.matches("\\p{javaLetter}+")) {
+			clientValidation = clientM;
 		}
 		return clientValidation;
 	}
@@ -215,8 +214,8 @@ public class Calcul {
 					}
 				}
 			}
-		}	
-		
+		}
+
 		new Facture(clients, prix, erreur);
 	}
 
