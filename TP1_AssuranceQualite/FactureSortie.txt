@@ -2,3 +2,4 @@ Bienvenue chez Barette!
 Factures:
 Roger 10,50$ TPS : 0,53$ TVQ : 1,05$
 Céline 20,75$ TPS : 1,04$ TVQ : 2,08$
+
