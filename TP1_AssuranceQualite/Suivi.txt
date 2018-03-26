@@ -1,21 +1,8 @@
 Charles:
-
-	- Création de la condition qui s'assure que les facture de 0$ ne sont pas affiché.
-	- Application des taxes.
-	- Condition de vérification des commandes incorrectes
-	- Test de la méthode calculTps
-	- Test de la méthode calculTvq
-	- Test de la méthode checkValidity
-	-
-	-
+	- Interface graphique entrée / sortie
+	- Ajout donnée entrée nom fichier et numéro de table
 
 Philippe:
-
-	- Modification automatique du nom de la facture pour le format : Facture-du-"date-heure".txt.
-	- Affichage de le facture sur l'écran terminal
-	- Affichage de toutes les commandes incorrectes avant les factures
-	-
-	-
-	-
-	-
-	-
+	- Condition si facture dépasse 100$ ou 3 ou + de client a table frais de service de 15%
+	- Adaptation pour production d'une facture par table
+	- Condition qui vérifie si le nom du fichier est déja défini sinon crée le nom / Nomenclature : Facture_[numéroTable]_[nombreClient]_[date].txt
