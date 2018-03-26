@@ -117,7 +117,6 @@ public class Facture {
 			facture.add(erreurCommande.get(i));
 		}
 		facture.add("\n");
-
 	}
 
 	// Check if price is higher than 0
