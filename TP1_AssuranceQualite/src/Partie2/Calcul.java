@@ -12,9 +12,11 @@ public class Calcul {
 	private ArrayList<String> sub = new ArrayList<String>();
 	private ArrayList<String> erreur = new ArrayList<String>();
 
-	public String[] clients;
+	public String[][] clients;
 	private String[][] plats;
 	private String[][] commandes;
+	
+	private int maxCLientPerTable = 4;
 
 	public String[][] getCommandes() {
 		return commandes;
@@ -25,49 +27,8 @@ public class Calcul {
 		// Appeler methode pour ouvrir le fichier .txt
 		ouvertureFichier();
 
-		//
-		int i = 0;
-		String temp;
-		do {
-			temp = obj.remove(0);
-
-			// Depose les donnees accumuler quand l'iteration rencontre :
-			if (temp.indexOf(':') >= 0 || temp.equals("Fin")) {
-				// Decide dans quelle tableau il depose les donnees
-				switch (i) {
-				case 0:
-					break;
-				// Tableau de client
-				case 1:
-					clients = new String[sub.size()];
-					for (int indCli = 0; indCli < sub.size(); indCli++) {
-						String clientTemp = checkClientValidity(sub.get(indCli));
-						if (!clientTemp.equals(" ")) {
-							clients[indCli] = clientTemp;
-						} else {
-							erreur.add("Client non valide");
-						}
-					}
-					break;
-				// Tableau de plats
-				case 2:
-					assignationPlats();
-					break;
-				// Tableau de commandes
-				case 3:
-					assignationCommande();
-					break;
-				}
-
-				i++;
-				// Vide le array sub
-				sub.clear();
-			} else {
-				// Ajoute la donnée actuel a sub
-				sub.add(temp);
-			}
-		} while (!temp.equals("Fin"));
-
+		assignationClients();
+		
 		faireCalcul();
 	}
 
@@ -87,6 +48,63 @@ public class Calcul {
 			e.printStackTrace();
 		}
 	}
+	
+	private void assignationClients() {
+		checkNumTable();
+		
+		//
+		clients = new String[sub.size()][maxCLientPerTable + 1];
+		int i = 0;
+		for(String table : sub) {
+			clients[i][0] = table;
+			i++;
+		}
+		
+		//
+		String temp = obj.remove(0);
+		do {
+			sub.add(temp);
+		}while(!temp.contains(":"));
+		
+		//
+		String[] tempEntry;
+		do {
+			i = 2;	
+			tempEntry = sub.remove(0).split(" ");
+			int numTable = Integer.parseInt(tempEntry[0]); 
+			
+			tempEntry[1] = checkClientValidity(tempEntry[1]);
+			
+			if (!tempEntry[1].equals(" ")) {
+				clients[numTable][1] = temp;
+				for(int j = 0; j < sub.size(); j++) {
+					tempEntry = sub.get(j).split(" ");
+					if(Integer.parseInt(tempEntry[0]) == numTable) {
+						sub.remove(j);
+						clients[numTable][i] = temp;
+						i++;
+					}
+				}
+			} else {
+				erreur.add("Client non valide");
+			}
+		}while(!temp.contains(":"));
+		
+		for(int j = 0; j < clients.length; j++) {
+			for(int k = 0; k < clients[0].length; k++) {
+				System.out.println(clients[j][k]);
+			}
+		}
+		
+		assignationPlats();
+	}
+	
+	private void checkNumTable() {
+		String temp = obj.remove(0);
+		do {
+			sub.add(temp);
+		}while(!temp.contains(":"));
+	}
 
 	private void assignationPlats() {
 		plats = new String[sub.size()][2];
@@ -98,6 +116,8 @@ public class Calcul {
 				plats[j][k] = tempPlat[k];
 			}
 		}
+		
+		assignationCommande();
 	}
 
 	private void assignationCommande() {
