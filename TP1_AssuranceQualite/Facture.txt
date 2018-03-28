@@ -1,13 +1,36 @@
 Clients :
-Roger
-Céline
-Steeve
+1 Roger
+1 Céline
+3 Steeve
+2 Emily
+2 Catherine
+4 Olivier
+2 Remy
+4 Emile
+2 Joshua
 Plats :
 Poutine 10.5
 Frites 2.5
 Repas_Poulet 15.75
+Hot_Dog 6.25
+Spagetti 13.2
+Hamburger 7
+Cheeseburger 8.25
+Cheeseburger_double 10.25
+Hamburger_deluxe 16.5
+Salade 12
 Commandes :
 Roger Poutine 1
+Roger Hamburger 1
 Céline Frites 2
 Céline Repas_Poulet 1
+Emily Salade 1
+Catherine Frites 1
+Catherine Spagetti 1
+Remy Poutine 1
+Remy Repas_Poulet 1
+Joshua Cheeseburger 3
+Steeve Hot_Dog 2
+Steeve Frites 1
+Olivier Hamburger_Deluxe
 Fin

@@ -1,5 +1,0 @@
-1. Mettre le nom du fichier avec une date et l'heure.
-
-2. Afficher le résultat de la facture dans le terminal.
-
-3. afficher les commandes erronées et la raison des commandes érronés d'une liste d'erreur.
