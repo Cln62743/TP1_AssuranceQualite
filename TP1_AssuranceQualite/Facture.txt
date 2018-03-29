@@ -3,6 +3,7 @@ Table:
 2
 3
 4
+6
 Clients :
 1 Roger
 1 Céline
@@ -11,7 +12,7 @@ Clients :
 2 Catherine
 4 Olivier
 2 Remy
-4 Emile
+6 Emile
 2 Joshua
 Plats :
 Poutine 10.5
@@ -19,11 +20,11 @@ Frites 2.5
 Repas_Poulet 15.75
 Hot_Dog 6.25
 Spagetti 13.2
-Hamburger 7
+Hamburger 7.0
 Cheeseburger 8.25
 Cheeseburger_double 10.25
 Hamburger_deluxe 16.5
-Salade 12
+Salade 12.0
 Commandes :
 Roger Poutine 1
 Roger Hamburger 1

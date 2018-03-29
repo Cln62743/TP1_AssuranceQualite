@@ -30,10 +30,10 @@ public class Facture {
 	BufferedWriter bw = null;
 	private ArrayList<String> afficherFacture = new ArrayList<>();
 
-	public Facture(String[] clientsM, double[] prixM, ArrayList<String> erreur) {
+	public Facture(String[][] clients, double[] prixM, ArrayList<String> erreur) {
 
 		FileWriter fw;
-		this.clients = clientsM;
+		this.clients = clients;
 		this.prix = prixM;
 		this.erreurCommande = erreur;
 		if (!file.exists()) {
