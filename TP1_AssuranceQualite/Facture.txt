@@ -38,5 +38,6 @@ Remy Repas_Poulet 1
 Joshua Cheeseburger 3
 Steeve Hot_Dog 2
 Steeve Frites 1
-Olivier Hamburger_Deluxe
+Olivier Hamburger_Deluxe 1
+Emile Cheeseburger 1
 Fin
