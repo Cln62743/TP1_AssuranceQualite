@@ -31,13 +31,12 @@ Roger Hamburger 1
 Céline Frites 2
 Céline Repas_Poulet 1
 Emily Salade 1
-Catherine Frites 1
 Catherine Spagetti 1
-Remy Poutine 1
+Remy Poutine 2
 Remy Repas_Poulet 1
 Joshua Cheeseburger 3
 Steeve Hot_Dog 2
 Steeve Frites 1
-Olivier Hamburger_Deluxe 1
+Olivier Hamburger_deluxe 1
 Emile Cheeseburger 1
 Fin

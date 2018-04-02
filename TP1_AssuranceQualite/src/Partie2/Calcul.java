@@ -18,10 +18,12 @@ public class Calcul {
 	private String nomFacture;
 	
 	private int maxCLientPerTable = 4;
+	
+	InterfaceGraphique interfaceGraphique;
 
 	public String[][] getCommandes() {return commandes;	}
 	
-	public Calcul() {}
+	public Calcul(InterfaceGraphique interfaceGraphique) { this.interfaceGraphique = interfaceGraphique; }
 
 	public void InitialiserFacture(String nomFacture) {
 		this.nomFacture = nomFacture;
@@ -45,7 +47,6 @@ public class Calcul {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Fin ouverture de fichier");	
 		return true;
 	}
 	
@@ -108,13 +109,6 @@ public class Calcul {
 			temp = sub.get(0).split(" ");
 		} while(!sub.isEmpty());
 		
-		/*for(int j = 0; j < clients.length; j++) {
-			for(int k = 0; k < clients[0].length; k++) {
-				System.out.println(clients[j][k]);
-			}
-		}*/
-		
-		System.out.println("Fin assignation client");
 		assignationPlats();	
 	}
 
@@ -134,13 +128,6 @@ public class Calcul {
 			temp = sub.get(0).split(" ");
 		}while(!sub.isEmpty());
 		
-		/*for(int j = 0; j < plats.length; j++) {
-			for(int k = 0; k < plats[0].length; k++) {
-				System.out.println(plats[j][k]);
-			}
-		}*/
-		
-		System.out.println("Fin assignation plat");
 		assignationCommande();
 	}
 
@@ -154,7 +141,7 @@ public class Calcul {
 			int tableActu =	findClientTable(temp[0]);
 			underSub.add(sub.remove(0));
 			
-			String[] clientTable = new String[4];
+			String[] clientTable = new String[maxCLientPerTable];
 			
 			if(tableActu != -1) {				
 				for(int i = 0; i < clientTable.length; i++) {
@@ -166,7 +153,7 @@ public class Calcul {
 			for(int i = 0; i < sub.size(); i++) {
 				boolean trouve = false;
 				temp = sub.get(x).split(" ");
-				for(int j = 0; j < clientTable.length; j++){				
+				for(int j = 0; j < clientTable.length; j++){
 					if(temp[0].equals(clientTable[j])) {
 						underSub.add(sub.remove(x));
 						trouve = true;
@@ -179,6 +166,7 @@ public class Calcul {
 			commandes = new String[underSub.size()][3];
 			for(int i = 0; i < commandes.length; i++) {
 				temp = underSub.remove(0).split(" ");
+
 				boolean valid = true;
 				if (!CheckPlatExist(temp[1])) {
 					erreur.add("Le plat choisi n'existe pas.");
@@ -190,23 +178,14 @@ public class Calcul {
 				}
 				
 				if(valid) {
-					for(int j = 0; j < commandes[0].length; j++) {
-						commandes[i][j] = temp[j];
-					}
+					commandes[i] = temp;
+					
 				}
 			}
 			
-			
-			for(int j = 0; j < commandes.length; j++) {
-				for(int k = 0; k < commandes[0].length; k++) {
-					System.out.print(commandes[j][k] + " ");
-				}
-				System.out.println();
-			}
 			faireCalcul(tableActu);
 		}while(!sub.isEmpty());
 		
-		System.out.println("Fin assignation commande");
 	};
 	
 	// Méthode utilitaire
@@ -264,19 +243,6 @@ public class Calcul {
 		return result;
 	}
 
-	private boolean CheckClientExist(String clientM) {
-		boolean result = false;
-		for (int i = 0; i < clients.length; i++) {
-			for(int j = 1; j < clients[0].length; j++) {
-				if (clientM.equals(clients[i][j])) {
-					result = true;
-					break;
-				}
-			}
-		}
-		return result;
-	}
-
 	private boolean CheckNbCommandeValid(String nbCommande) {
 		boolean result = false;
 		if (nbCommande.matches("\\d+")) {
@@ -301,13 +267,7 @@ public class Calcul {
 			}
 		}
 
-		System.out.println("Fin faire calcul");
-		new Facture(nomFacture,clients[table], resultatPrix, erreur);
-	}
-
-	public static void main(String[] args) {
-
-		new Calcul();
+		new Facture(nomFacture,clients[table], resultatPrix, erreur, this.interfaceGraphique);
 	}
 }
 	

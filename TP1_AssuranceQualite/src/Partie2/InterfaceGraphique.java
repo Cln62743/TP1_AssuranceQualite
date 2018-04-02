@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -24,7 +26,7 @@ import javax.swing.JTextField;
 public class InterfaceGraphique extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<ArrayList<String>> ListFacture = new ArrayList<ArrayList<String>>();
+	private static ArrayList<ArrayList<String>> ListFacture = new ArrayList<ArrayList<String>>();
 	int idAffichage = 0;
 	
 	private JTextArea affichageFact = new JTextArea("",25, 50);
@@ -37,8 +39,7 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 	private JButton btnLireFichier = new JButton("Lire le fichier");
 	private JButton btnProduireFact = new JButton("Produire la facture");
 	
-	private Calcul calcul = new Calcul();
-	
+	private Calcul calcul = new Calcul(this);
 	
 	public InterfaceGraphique() {
 		super("Logiciel de facturation de chezBarette");
@@ -97,7 +98,6 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 		JLabel txtNomDefault = new JLabel("_[numéroTable]_[nombreClient]_[date].txt");
 		panneauInfoCustom.add(txtNomDefault);
 		
-		
 		// Panneau des boutons
 		JPanel panneauBouton = new JPanel();
 		
@@ -126,35 +126,35 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 	private String getNomFactureCustom() {return nomFactureCustom.getText();}
 	
 	public void ajouterFactureAffichage(String nomFichier) {
-		File file = new File(nomFichier);
-		ArrayList<String> facture = new ArrayList<String>();
-		
 		try {
-
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			String line;
+			FileInputStream file = new FileInputStream(nomFichier);
+			ArrayList<String> facture = new ArrayList<String>();
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(file));
+			String line = null;
 
 			while ((line = br.readLine()) != null) {
 				facture.add(line);
 			}
+			
 			ListFacture.add(facture);
-			RefreshAffichageFact();
-
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
+		
+		RefreshAffichageFact();
 	}
 
 	private void RefreshAffichageFact() {
-		affichageFact.setText(null);
+		affichageFact.setText("");
 		
 		if(ListFacture.size() < 1) {
 			affichageFact.setBackground(new Color( 255, 255, 255, 150));
 		}else {
 			affichageFact.setBackground(new Color( 255, 255, 255));
 		}
-		
+		System.out.println(idAffichage);
 		for(String line: ListFacture.get(idAffichage)) {
 			affichageFact.append(line + "\n");
 		}	
@@ -168,24 +168,35 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == btnLireFichier) {
+			
 			calcul.ouvertureFichier();
 			btnProduireFact.setEnabled(true);
+		
 		}else if (arg0.getSource() == btnProduireFact){
+			
 			calcul.InitialiserFacture(getNomFactureCustom());
 			btnAffichageGauche.setEnabled(true);
 			btnAffichageDroit.setEnabled(true);
+			btnProduireFact.setEnabled(false);
+		
 		}else if (arg0.getSource() == btnAffichageGauche) {
+			
 			if(idAffichage == 0) {
 				idAffichage = ListFacture.size() - 1;
+			
 			}else {
 				idAffichage --;
 			}
+			RefreshAffichageFact();
 		}else if (arg0.getSource() == btnAffichageDroit) {
+			
 			if(idAffichage == ListFacture.size() - 1) {
 				idAffichage = 0;
+			
 			}else {
 				idAffichage ++;
 			}
+			RefreshAffichageFact();
 		}
 	}
 
