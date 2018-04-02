@@ -1,0 +1,13 @@
+commande erroné et la raison
+format incorrect
+
+
+Bienvenue chez Barette!
+Factures:
+numéro de table
+7
+43,33$ TPS : 2,17$ TVQ : 4,33$
+6
+43,33$ TPS : 2,17$ TVQ : 4,33$
+5
+43,33$ TPS : 2,17$ TVQ : 4,33$

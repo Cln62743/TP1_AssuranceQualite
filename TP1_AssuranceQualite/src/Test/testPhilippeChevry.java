@@ -5,43 +5,44 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+
+import Partie2.Calcul;
 import Partie2.Facture;
 
 class testPhilippeChevry {
 
+
 	@Test
-	void testListeAffichageAvecErreurNonNull() {
-		 String[] clientsM1 = {"christian","ddd" ,"ddddde"} ;
-		
-		 double[] prixM1 =   {15.45,43.33 ,0.00};
+	void testListeAffichageAvecErreur() {
+		 String[] clientsM1 = {"7","6" ,"5"} ;
+		String fichier1 = "";
+		 double prixM1 =   43.33;
 		 ArrayList<String>erreur1 = new ArrayList<>() ;
 		 erreur1.add("format incorrect");
-		Facture facture = new Facture( clientsM1,  prixM1, erreur1);
+		Facture facture = new Facture(fichier1, clientsM1,  prixM1, erreur1);
 		facture.rentrerVariableList();
-		assertNotNull(facture.rentrerVariableList());
+		if (facture.rentrerVariableList().size() >= 1) {
+			assertEquals(1, facture.rentrerVariableList().size());
+		}
 	}
 	
 	@Test
-	void testListeAffichageAucuneErreurNonNull() {
-		 String[] clientsM9 = {"christian","david" ,"ddddddde"} ;
-		
-		 double[] prixM9 =   {15.45,90.33 ,0.00};
-		 ArrayList<String>erreur9 = new ArrayList<>() ;
-		 erreur9.add("");
-		Facture facture1 = new Facture( clientsM9,  prixM9, erreur9);
-		facture1.rentrerVariableList();
-			assertNotNull(facture1.rentrerVariableList());	
+	void testCommandeNull() {
+	
+	Calcul calcul = new Calcul();
+			assertNull(calcul.getCommandes());	
 	}
 
 	@Test
 	void testTableauErreurNull() {
-		
-		 String[] clientsM10 = {"christian","ddd" ,"ddddde"} ;
+		String fichier = "";
+		 String[] clientsM10 = {"4","2" ,"1"} ;
 			
-		 double[] prixM10 =   {15.45,90.33 ,0.00};
+		 double prixM10 = 15.45;
+		 
 		 ArrayList<String>erreur10 = new ArrayList<>() ;
 		 erreur10.add(" ");
-		Facture facture2 = new Facture( clientsM10,  prixM10, erreur10);
+		Facture facture2 = new Facture(fichier, clientsM10,  prixM10, erreur10);
 		facture2.erreurCommande = null;
 		assertNull(facture2.erreurCommande);
 	}

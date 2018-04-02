@@ -24,9 +24,8 @@ public class Facture {
 	Calendar calendar = Calendar.getInstance();
 	String date = format.format(calendar.getTime());
 
-	String nomFichier = "Facture du " + date + ".txt";
-
-	File file = new File(nomFichier);
+	String nomFichier = "";
+	int compteurClient = 0;
 	BufferedWriter bw = null;
 	private ArrayList<String> afficherFacture = new ArrayList<>();
 
@@ -36,7 +35,12 @@ public class Facture {
 	// --- A lire Philippe --- Pour afficher les factures dans l'interface graphique utilise
 	// --- la methode ajouterFactureAffichage() avec le nom complet du fichier .txt en parametre le reste devrais se faire tout seule
 	public Facture( String nomFacture, String[] clients, double prixM, ArrayList<String> erreur) {
-
+		String nomFichier = "Facture de la table numéro "+ clients[0] 
+				+ compteurClient + date + ".txt";
+			File file = new File(nomFichier);
+		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
+		interfaceGraphique.ajouterFactureAffichage(nomFichier);
+	
 		FileWriter fw;
 		this.clients = clients;
 		this.prix = prixM;
@@ -97,12 +101,14 @@ public class Facture {
 		facture.add("Bienvenue chez Barette!");
 
 		facture.add("Factures:");
-
+		facture.add("numéro de table");
 		for (int i = 0; i < clients.length; i++) {
-			if (checkValidity(prix[i])) {
-				prix[i] += taxe[0] + taxe[1];
-				facture.add(clients[i] + " " + df.format(prix[i]) + " TPS : " + df.format(calculTps(prix[i]))
-						+ " TVQ : " + df.format(calculTvq(prix[i])) + "");
+			prix =	prixAvecFraisOuNon(prix);
+			if (checkValidity(prix)) {
+				prix += taxe[0] + taxe[1];
+				facture.add(clients[i]);
+				facture.add( df.format(prix) + " TPS : " + df.format(calculTps(prix))
+						+ " TVQ : " + df.format(calculTvq(prix)) + "");
 			}
 		}
 	}
@@ -123,7 +129,20 @@ public class Facture {
 		}
 		facture.add("\n");
 	}
-
+	private double prixAvecFraisOuNon(double prix1) {
+		double prixFacture = prix1;
+		double prixFraisFacture = 0.00;
+	
+		for (int i = 0; i < clients[0].length(); i++) {
+			compteurClient++;
+		}
+		if (prixFacture > 100 && compteurClient >= 3 ) {
+			prixFraisFacture = prixFacture * 0.15;
+		} else {
+			prixFraisFacture = prixFacture;
+		}
+		return prixFraisFacture;
+	}
 	// Check if price is higher than 0
 	public static boolean checkValidity(double prixLigne) {
 		boolean result = false;

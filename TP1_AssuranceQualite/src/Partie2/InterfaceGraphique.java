@@ -190,3 +190,4 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 	}
 
 }
+	
