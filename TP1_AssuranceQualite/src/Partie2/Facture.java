@@ -25,7 +25,7 @@ public class Facture {
 	String date = format.format(calendar.getTime());
 
 	String nomFichier = "";
-	int compteurClient = 0;
+	int nbreClient = 0;
 	BufferedWriter bw = null;
 	private ArrayList<String> afficherFacture = new ArrayList<>();
 
@@ -35,12 +35,12 @@ public class Facture {
 	// --- A lire Philippe --- Pour afficher les factures dans l'interface graphique utilise
 	// --- la methode ajouterFactureAffichage() avec le nom complet du fichier .txt en parametre le reste devrais se faire tout seule
 	public Facture( String nomFacture, String[] clients, double prixM, ArrayList<String> erreur) {
-		String nomFichier = "Facture de la table numéro "+ clients[0] 
-				+ compteurClient + date + ".txt";
+		String nomFichier = "Facture de la table numéro "+ clients[0] +"_"
+				+ nbreClient+"_" + date + ".txt";
 			File file = new File(nomFichier);
 		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
 		interfaceGraphique.ajouterFactureAffichage(nomFichier);
-	
+		
 		FileWriter fw;
 		this.clients = clients;
 		this.prix = prixM;
@@ -60,7 +60,6 @@ public class Facture {
 
 			afficher();
 			bw.close();
-			afficherTerminal();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,6 +70,7 @@ public class Facture {
 		afficherFacture = rentrerVariableList();
 		try {
 			for (int i = 0; i < afficherFacture.size(); i++) {
+				System.out.println(afficherFacture.get(i));
 				bw.write(afficherFacture.get(i));
 				bw.newLine();
 			}
@@ -79,15 +79,9 @@ public class Facture {
 		}
 	}
 
-	public void afficherTerminal() {
-		afficherFacture = rentrerVariableList();
-		for (int i = 0; i < afficherFacture.size(); i++) {
-			System.out.println(afficherFacture.get(i));
-		}
-	}
-
 	public ArrayList<String> rentrerVariableList() {
 		ArrayList<String> facture = new ArrayList<>();
+		
 		if (erreurCommande.size() != 0) {
 			rentrerListAvecErreur(facture);
 		}
@@ -97,6 +91,15 @@ public class Facture {
 		return facture;
 	}
 
+	private void rentrerListAvecErreur(ArrayList<String> facture) {
+		facture.add("commande erroné et la raison");
+
+		for (int i = 0; i < erreurCommande.size(); i++) {
+			facture.add(erreurCommande.get(i));
+		}
+		facture.add("\n");
+	}
+	
 	private void rentrerListSansErreur(ArrayList<String> facture) {
 		facture.add("Bienvenue chez Barette!");
 
@@ -112,37 +115,23 @@ public class Facture {
 			}
 		}
 	}
-
-	private void rentrerListAvecErreur(ArrayList<String> facture) {
-		//Calcul calcul = new Calcul();
-
-		facture.add("commande erroné et la raison");
-
-		/*for (int i = 0; i < calcul.getCommandes().length; i++) {
-			for (int j = 0; j < calcul.getCommandes()[i].length; j++) {
-				erreurCommande.add(calcul.getCommandes()[i][j]);
-			}
-		}*/
-
-		for (int i = 0; i < erreurCommande.size(); i++) {
-			facture.add(erreurCommande.get(i));
-		}
-		facture.add("\n");
-	}
+	
 	private double prixAvecFraisOuNon(double prix1) {
 		double prixFacture = prix1;
 		double prixFraisFacture = 0.00;
-	
+		int compteurClient = 0;
 		for (int i = 0; i < clients[0].length(); i++) {
 			compteurClient++;
 		}
-		if (prixFacture > 100 && compteurClient >= 3 ) {
+		nbreClient = compteurClient;
+		if (prixFacture > 100 || compteurClient >= 3 ) {
 			prixFraisFacture = prixFacture * 0.15;
 		} else {
 			prixFraisFacture = prixFacture;
 		}
 		return prixFraisFacture;
 	}
+	
 	// Check if price is higher than 0
 	public static boolean checkValidity(double prixLigne) {
 		boolean result = false;
