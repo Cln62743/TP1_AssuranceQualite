@@ -7,9 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -109,7 +107,6 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 		
 		btnProduireFact.setEnabled(false);
 		
-
 		
 		//
 		panneauAffichageFact.setOpaque(false);
@@ -154,7 +151,6 @@ public class InterfaceGraphique extends JFrame implements ActionListener{
 		}else {
 			affichageFact.setBackground(new Color( 255, 255, 255));
 		}
-		System.out.println(idAffichage);
 		for(String line: ListFacture.get(idAffichage)) {
 			affichageFact.append(line + "\n");
 		}	

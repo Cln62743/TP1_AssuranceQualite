@@ -6,12 +6,12 @@ Table:
 6
 Clients :
 1 Roger
-1 Céline
 3 Steeve
 2 Emily
 2 Catherine
 4 Olivier
 2 Remy
+1 Céline
 6 Emile
 2 Joshua
 Plats :
