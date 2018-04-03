@@ -34,6 +34,10 @@ public class Facture {
 	InterfaceGraphique interfaceGraphique;
 
 	
+	// --- A lire Philippe --- Tu recois le numéro de table et les clients attitré a cette table du coup facture sera appeler plusieur fois
+	
+	// --- A lire Philippe --- Pour afficher les factures dans l'interface graphique utilise
+	// --- la methode ajouterFactureAffichage() avec le nom complet du fichier .txt en parametre le reste devrais se faire tout seule
 	public Facture( String nomFacture, String[] clients, double prixM, ArrayList<String> erreur, InterfaceGraphique interfaceGraphique) {
 		this.interfaceGraphique = interfaceGraphique;
 		this.clients = clients;
@@ -76,7 +80,6 @@ public class Facture {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		interfaceGraphique.ajouterFactureAffichage(nomFichier);
 	}
 
 	public void afficher() {
@@ -92,7 +95,7 @@ public class Facture {
 			e.printStackTrace();
 		}
 		
-		
+		interfaceGraphique.ajouterFactureAffichage(nomFichier);
 	}
 
 	public void rentrerVariableList() {
@@ -129,8 +132,8 @@ public class Facture {
 		afficherFacture.add("Montant : " + df.format(prix));
 		
 		if(prix > 100.0 || nbClients >= 3) {
-			fraisService = prixAvecFrais(prix, nbClients);
-			prix += fraisService;
+			prix =	prixAvecFrais(prix, nbClients);
+			fraisService = prix * 0.15;
 			afficherFacture.add("Frais de service : " + df.format(fraisService));
 		}
 		
@@ -146,7 +149,7 @@ public class Facture {
 	
 	private double prixAvecFrais(double prix, int nbClients) {
 		double resultat = 0;
-		resultat = prix * 0.15;
+		resultat = prix + (prix * 0.15);
 		
 		return resultat;
 	}

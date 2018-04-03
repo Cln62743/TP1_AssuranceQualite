@@ -51,11 +51,9 @@ public class Calcul {
 	}
 	
 	private void assignationClients() {
-		obj.remove(0);
-		remplirSub();
+		checkNbTable();
 		
 		//
-		
 		clients = new String[sub.size()][maxCLientPerTable + 1];
 		int i = 0;
 		
@@ -82,7 +80,9 @@ public class Calcul {
 					break;
 				}
 			}
+			
 			temp[1] = checkClientValidity(temp[1]);
+			
 			if (!temp[1].equals(" ")) {
 				clients[actuListPos][1] = temp[1];
 				int left = sub.size()-1;
@@ -202,24 +202,33 @@ public class Calcul {
 	// Validation
 	private String checkClientValidity(String clientM) {
 		String clientValidation = " ";
-		if (clientM.matches("[a-zA-z]+")) {
+		if (clientM.matches("\\p{javaLetter}+")) {
 			clientValidation = clientM;
 		}
 		return clientValidation;
 	}
 	
+	private void checkNbTable() {
+		obj.remove(0);
+		String temp = obj.remove(0);
+		do {
+			sub.add(temp);
+			temp = obj.remove(0);
+		}while(!temp.contains(":"));
+	}
+
 	private int findClientTable(String client) {
 		int table = -1;
 		
 		for(int i = 0; i < clients.length; i++) {
 			for(int j = 1; j < clients[0].length; j++) {
-				//System.out.println(client + " | " + clients[i][j]);
 				if(client.equals(clients[i][j])) {
 					table = i;
 					break;
 				}
 			}
 		}
+		
 		return table;
 	}
 
