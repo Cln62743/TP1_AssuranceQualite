@@ -80,6 +80,7 @@ public class Facture {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		interfaceGraphique.ajouterFactureAffichage(nomFichier);
 	}
 
 	public void afficher() {
@@ -95,7 +96,7 @@ public class Facture {
 			e.printStackTrace();
 		}
 		
-		interfaceGraphique.ajouterFactureAffichage(nomFichier);
+		
 	}
 
 	public void rentrerVariableList() {
