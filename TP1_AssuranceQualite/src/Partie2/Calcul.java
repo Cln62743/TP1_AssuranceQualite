@@ -270,4 +270,3 @@ public class Calcul {
 		new Facture(nomFacture,clients[table], resultatPrix, erreur, this.interfaceGraphique);
 	}
 }
-	
